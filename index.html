@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>林嘉成 · 阿成 — Island, Sunset &amp; Guitar</title>
+<meta name="description" content="海岛、落日与吉他。林嘉成（阿成）的个人主页。" />
+<meta name="theme-color" content="#fbf8f4" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+SC:wght@300;400;500&family=Noto+Serif+SC:wght@300;400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+/* ============================================================
+   0. RESET & TOKENS
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body { margin: 0; padding: 0; }
+
+:root{
+  --paper:      #fbf8f4;
+  --ink:        #1d2129;
+  --ink-soft:   #525862;
+  --accent:     #e67e22;
+  --line:       rgba(29, 33, 41, .13);
+  --serif:      "Playfair Display", "Noto Serif SC", "Songti SC", serif;
+  --sans:       "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+
+html{
+  -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
+}
+
+body{
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; }
+
+::selection{
+  background: rgba(230, 126, 34, .22);
+  color: var(--ink);
+}
+
+/* Lenis 官方推荐样式 */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+/* ============================================================
+   1. INTRO — 米黄色开屏页
+   ============================================================ */
+.intro{
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(24px, 7vw, 130px);
+  overflow: hidden;
+}
+
+.intro__glow{
+  position: absolute;
+  right: -16vw;
+  top: 50%;
+  width: min(86vw, 980px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(230, 126, 34, .20) 0%,
+    rgba(230, 126, 34, .08) 40%,
+    rgba(230, 126, 34, 0) 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.intro__inner{ position: relative; z-index: 1; }
+
+.eyebrow{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 clamp(22px, 4vh, 46px);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.eyebrow::before{
+  content: "";
+  width: 48px;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+}
+
+.intro__title{
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(46px, 8.4vw, 132px);
+  line-height: 1.05;
+  letter-spacing: -.02em;
+}
+.intro__title em{
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+}
+.intro__title .dot{ color: var(--accent); }
+
+.intro__sub{
+  margin: clamp(26px, 5vh, 52px) 0 0;
+  max-width: 42ch;
+  font-size: clamp(14px, 1.05vw, 17px);
+  font-weight: 300;
+  line-height: 2;
+  color: var(--ink-soft);
+  letter-spacing: .02em;
+}
+
+.intro__scroll{
+  position: absolute;
+  left: clamp(24px, 7vw, 130px);
+  bottom: clamp(28px, 6vh, 64px);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: pointer;
+  user-select: none;
+  z-index: 2;
+}
+.scroll-line{
+  position: relative;
+  display: block;
+  width: 64px;
+  height: 1px;
+  background: var(--line);
+  overflow: hidden;
+}
+.scroll-line::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--accent);
+  transform: translateX(-100%);
+  animation: sweep 2.6s cubic-bezier(.65,0,.35,1) infinite;
+}
+@keyframes sweep{
+  0%   { transform: translateX(-100%); }
+  55%  { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+/* ============================================================
+   2. SPLIT — 左右双屏
+   ============================================================ */
+.split{
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+/* ---------- 2.1 左侧固定区 ---------- */
+.panel{
+  flex: 0 0 50%;
+  width: 50%;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(30px, 5vw, 96px);
+  background: var(--paper);
+  will-change: background-color;
+  z-index: 2;
+}
+
+.panel__inner{
+  position: relative;
+  padding-left: clamp(22px, 3vw, 52px);
+  width: 100%;
+}
+
+/* 极简竖线装饰 */
+.panel__inner::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    var(--accent) 0%,
+    rgba(230, 126, 34, .35) 45%,
+    rgba(230, 126, 34, 0) 100%
+  );
+}
+.panel__inner::after{
+  content: "";
+  position: absolute;
+  left: -2.5px;
+  top: 4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.panel__eyebrow{
+  margin: 0 0 clamp(18px, 3vh, 30px);
+  font-size: 11px;
+  letter-spacing: .34em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.panel__name{
+  margin: 0;
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(42px, 5.4vw, 92px);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+}
+
+.panel__nick{
+  margin: 10px 0 0;
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.7vw, 26px);
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: .04em;
+}
+
+.panel__en{
+  margin: clamp(20px, 3.4vh, 34px) 0 clamp(22px, 3.6vh, 38px);
+  padding-top: clamp(20px, 3.4vh, 34px);
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.tags{
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 clamp(26px, 4.5vh, 48px);
+}
+.tags li{
+  font-size: 12px;
+  letter-spacing: .14em;
+  color: var(--ink-soft);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 7px 17px;
+  transition: border-color .5s ease, color .5s ease;
+}
+.tags li:hover{
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* TikTok 链接 */
+.tiktok{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  padding-bottom: 7px;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color .4s ease;
+}
+.tiktok::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+}
+.tiktok:hover{ color: var(--accent); }
+.tiktok:hover::after{ transform: scaleX(1); }
+.tiktok svg{ width: 13px; height: 13px; flex: none; }
+
+/* ---------- 2.2 右侧滚动叙事区 ---------- */
+.stream{
+  flex: 0 0 50%;
+  width: 50%;
+  min-width: 0;
+  position: relative;
+  z-index: 1;
+}
+.stream__inner{
+  padding-bottom: 22vh;
+}
+
+.scene{ position: relative; }
+.scene + .scene{ margin-top: 10vh; }
+.scene:first-child{ padding-top: 20vh; }
+
+/* 章节小标 */
+.scene__label{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 20px;
+  padding: 0 clamp(24px, 5vw, 80px);
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.scene__label::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* 大字引语 */
+.quote{
+  margin: 0;
+  padding: 0 clamp(24px, 5vw, 80px);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(26px, 3.1vw, 52px);
+  line-height: 1.44;
+  letter-spacing: .01em;
+  color: var(--ink);
+}
+.quote .hl{
+  color: var(--accent);
+  position: relative;
+  white-space: nowrap;
+}
+.quote__en{
+  margin: 26px 0 0;
+  padding: 0 clamp(24px, 5vw, 80px);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: clamp(13px, 1.05vw, 16px);
+  color: var(--ink-soft);
+  letter-spacing: .04em;
+}
+
+/* 正文 */
+.prose{
+  margin: 0;
+  padding: 0 clamp(24px, 5vw, 80px);
+  font-size: clamp(15px, 1.05vw, 17px);
+  font-weight: 300;
+  line-height: 2.15;
+  letter-spacing: .02em;
+  color: var(--ink-soft);
+}
+
+/* 图片：100% 铺满右侧 */
+.fig{
+  margin: 0;
+  position: relative;
+  width: 100%;
+  height: 64vh;
+  overflow: hidden;
+  background: #eae2d7;
+  box-shadow: 0 40px 90px -60px rgba(29, 33, 41, .65);
+}
+.fig img{
+  position: absolute;
+  top: -20%;
+  left: 0;
+  width: 100%;
+  height: 140%;
+  object-fit: cover;
+  will-change: transform;
+  backface-visibility: hidden;
+}
+/* 胶片感叠层 */
+.fig::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background:
+    linear-gradient(180deg, rgba(251, 248, 244, .10) 0%, rgba(230, 126, 34, .05) 55%, rgba(29, 33, 41, .10) 100%);
+  box-shadow: inset 0 0 130px rgba(29, 33, 41, .16);
+}
+
+/* 结尾 */
+.outro{
+  padding: 0 clamp(24px, 5vw, 80px);
+  margin-top: 18vh;
+}
+.outro__label{
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  font-size: 11px;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.outro__label::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.outro__title{
+  margin: 0 0 clamp(30px, 5vh, 48px);
+  font-family: var(--serif);
+  font-weight: 400;
+  font-size: clamp(24px, 2.6vw, 42px);
+  line-height: 1.5;
+  letter-spacing: .01em;
+}
+.outro__title em{
+  font-style: italic;
+  color: var(--accent);
+}
+
+.outro__link{
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 30px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  text-decoration: none;
+  font-size: 12px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--ink);
+  transition: background-color .55s cubic-bezier(.22,1,.36,1),
+              border-color .55s ease,
+              color .45s ease,
+              transform .55s cubic-bezier(.22,1,.36,1);
+}
+.outro__link:hover{
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.outro__link svg{
+  width: 14px;
+  height: 14px;
+  transition: transform .55s cubic-bezier(.22,1,.36,1);
+}
+.outro__link:hover svg{ transform: translate(3px, -3px); }
+
+.outro__note{
+  margin: 34px 0 0;
+  font-size: 12px;
+  letter-spacing: .12em;
+  color: rgba(82, 88, 98, .6);
+}
+
+/* ============================================================
+   3. MOBILE — 单栏自然滚动
+   ============================================================ */
+@media (max-width: 900px){
+  .split{
+    display: block;
+  }
+
+  /* 左侧信息 → 顶部 Hero */
+  .panel{
+    position: relative;
+    top: auto;
+    width: 100%;
+    flex: none;
+    height: auto;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 16vh 7vw 12vh;
+    align-items: center;
+  }
+  .panel__inner{
+    padding-left: 20px;
+  }
+  .panel__name{ font-size: clamp(46px, 13vw, 84px); }
+  .panel__nick{ font-size: clamp(19px, 5vw, 26px); }
+  .panel__en{ font-size: 11px; letter-spacing: .22em; }
+  .tags li{ padding: 7px 15px; font-size: 11.5px; }
+
+  /* 右侧叙事 → 自然滚动 */
+  .stream{
+    width: 100%;
+  }
+  .stream__inner{
+    padding-bottom: 14vh;
+  }
+  .scene:first-child{
+    padding-top: 12vh;
+  }
+  .scene + .scene{
+    margin-top: 10vh;
+  }
+
+  .quote{ font-size: clamp(24px, 7.2vw, 38px); line-height: 1.45; }
+  .quote__en{ font-size: 13px; margin-top: 20px; }
+  .prose{ font-size: 15px; line-height: 2.05; }
+
+  .fig{ height: 60vh; }
+  .fig img{ will-change: auto; }
+
+  .outro{ margin-top: 14vh; }
+  .outro__title{ font-size: clamp(22px, 6.4vw, 32px); }
+  .outro__link{ padding: 14px 24px; font-size: 11px; }
+}
+
+@media (max-width: 480px){
+  .fig{ height: 54vh; }
+}
+
+/* 无障碍：减少动效 */
+@media (prefers-reduced-motion: reduce){
+  .scroll-line::after{ animation: none; }
+  *{ scroll-behavior: auto !important; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     INTRO — 米黄色开屏
+     ============================================================ -->
+<section class="intro">
+  <div class="intro__glow"></div>
+
+  <div class="intro__inner">
+    <p class="eyebrow">Hello — 认识我</p>
+
+    <h1 class="intro__title">
+      Hello，我是<br />
+      <em>James</em> 林<span class="dot">.</span>
+    </h1>
+
+    <p class="intro__sub">
+      认识我 —— 一个把海岛黄昏写进旋律的人。<br />
+      海风、落日与吉他，是我全部的浪漫。
+    </p>
+  </div>
+
+  <div class="intro__scroll" id="scrollHint">
+    <span>Scroll</span>
+    <span class="scroll-line"></span>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SPLIT — 双屏分割
+     ============================================================ -->
+<section class="split">
+
+  <!-- ---------- 左侧固定区 ---------- -->
+  <aside class="panel" id="panel">
+    <div class="panel__inner">
+      <p class="panel__eyebrow">Island · Sunset · Guitar</p>
+
+      <h2 class="panel__name">林嘉成</h2>
+      <p class="panel__nick">阿成 · A Cheng</p>
+
+      <p class="panel__en">Island, Sunset &amp; Guitar</p>
+
+      <ul class="tags">
+        <li>海岛</li>
+        <li>落日</li>
+        <li>吉他</li>
+        <li>松弛感</li>
+      </ul>
+
+      <a class="tiktok" href="https://v.douyin.com/ekfau9rwgS0/" target="_blank" rel="noopener">
+        <span>Follow the Sunset</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 17L17 7" />
+          <path d="M8 7h9v9" />
+        </svg>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ---------- 右侧滚动叙事区 ---------- -->
+  <main class="stream">
+    <div class="stream__inner">
+
+      <!-- 01 引语 -->
+      <section class="scene" data-theme="base">
+        <p class="scene__label reveal">01 / 自我介绍</p>
+        <p class="quote reveal">
+          大家好，我叫林嘉成，<br />
+          也可以叫我<span class="hl">阿成</span>。
+        </p>
+        <p class="quote__en reveal">Nice to meet you — I'm Cheng.</p>
+      </section>
+
+      <!-- 图 1 -->
+      <section class="scene" data-theme="sea">
+        <figure class="fig reveal">
+          <img
+            src="https://2012hyl.github.io/imgbed/images/20261110_223322_hvk03l.jpg"
+            alt="海岛傍晚的海面与落日" loading="eager" />
+        </figure>
+      </section>
+
+      <!-- 02 正文 -->
+      <section class="scene" data-theme="sun">
+        <p class="scene__label reveal">02 / 海岛的风</p>
+        <p class="prose reveal">
+          我偏爱海岛傍晚的风，喜欢海边落日漫过海面的氛围感。闲暇时我会抱着吉他弹唱，把普吉、三亚这类海滨风景里感受到的松弛感，融进旋律里面。
+        </p>
+      </section>
+
+      <!-- 图 2 -->
+      <section class="scene" data-theme="dusk">
+        <figure class="fig reveal">
+          <img
+            src="https://2012hyl.github.io/imgbed/images/20261110_223302_60mbrc.jpg"
+            alt="海边黄昏时的风景" loading="lazy" />
+        </figure>
+      </section>
+
+      <!-- 03 正文 -->
+      <section class="scene" data-theme="calm">
+        <p class="scene__label reveal">03 / 吉他与黄昏</p>
+        <p class="prose reveal">
+          我享受自由随性的生活，热爱奔赴海边看黄昏，也习惯用吉他记录沿途的所见所想。不喜欢紧绷的节奏，向往热烈又简单的状态，期待和同样喜欢海风与音乐的人相遇。
+        </p>
+      </section>
+
+      <!-- 图 3 -->
+      <section class="scene" data-theme="sea">
+        <figure class="fig reveal">
+          <img
+            src="https://2012hyl.github.io/imgbed/images/20261110_223734_365tzn.jpg"
+            alt="海岛旅途中随手拍下的一帧" loading="lazy" />
+        </figure>
+      </section>
+
+      <!-- 图 4 -->
+      <section class="scene" data-theme="sun">
+        <figure class="fig reveal">
+          <img
+            src="https://2012hyl.github.io/imgbed/images/20261110_223250_jxoj9p.jpg"
+            alt="日落与海风的旅途记忆" loading="lazy" />
+        </figure>
+      </section>
+
+      <!-- 04 结尾 -->
+      <section class="scene outro" data-theme="calm">
+        <p class="outro__label reveal">04 / 相遇</p>
+        <h3 class="outro__title reveal">
+          期待和同样喜欢<br />
+          <em>海风与音乐</em>的人相遇。
+        </h3>
+
+        <a class="outro__link reveal" href="https://v.douyin.com/ekfau9rwgS0/" target="_blank" rel="noopener">
+          <span>直达 TikTok</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 17L17 7" />
+            <path d="M8 7h9v9" />
+          </svg>
+        </a>
+
+        <p class="outro__note reveal">林嘉成 · 阿成 — Island, Sunset &amp; Guitar</p>
+      </section>
+
+    </div>
+  </main>
+
+</section>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://unpkg.com/lenis@1.1.14/dist/lenis.min.js"></script>
+
+<script>
+(function () {
+  "use strict";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ==========================================================
+     1. LENIS — 丝滑滚动
+     ========================================================== */
+  let lenis = null;
+
+  if (typeof Lenis !== "undefined") {
+    lenis = new Lenis({
+      duration: 1.15,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+      wheelMultiplier: 1,
+      touchMultiplier: 1.6,
+      lerp: 0.09
+    });
+
+    lenis.on("scroll", ScrollTrigger.update);
+
+    gsap.ticker.add((time) => lenis.raf(time * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+
+  /* ==========================================================
+     2. INTRO 入场动画
+     ========================================================== */
+  const introTl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+  introTl
+    .from(".intro__glow", { opacity: 0, scale: 0.82, duration: 2.0, ease: "power2.out" }, 0)
+    .from(".eyebrow", { opacity: 0, y: 22, duration: 0.9 }, 0.15)
+    .from(".intro__title", { opacity: 0, y: 48, duration: 1.25 }, 0.28)
+    .from(".intro__sub", { opacity: 0, y: 26, duration: 1.0 }, 0.62)
+    .from(".intro__scroll", { opacity: 0, duration: 0.9 }, 0.95);
+
+  // 开屏区的轻微视差退出
+  if (!reduceMotion) {
+    gsap.to(".intro__inner", {
+      yPercent: -14,
+      opacity: 0.25,
+      ease: "none",
+      scrollTrigger: {
+        trigger: ".intro",
+        start: "top top",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+  }
+
+  /* 点击 Scroll 提示 → 平滑进入双屏 */
+  const scrollHint = document.getElementById("scrollHint");
+  if (scrollHint) {
+    scrollHint.addEventListener("click", () => {
+      const target = document.querySelector(".split");
+      if (!target) return;
+      if (lenis) {
+        lenis.scrollTo(target, { offset: 0, duration: 1.6 });
+      } else {
+        target.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  }
+
+  /* ==========================================================
+     3. 滚动浮现 — 淡入 + 向上
+     ========================================================== */
+  gsap.utils.toArray(".scene").forEach((scene) => {
+    const items = scene.querySelectorAll(".reveal");
+    if (!items.length) return;
+
+    gsap.from(items, {
+      opacity: 0,
+      y: 46,
+      duration: 1.15,
+      ease: "power3.out",
+      stagger: 0.1,
+      scrollTrigger: {
+        trigger: scene,
+        start: "top 84%",
+        once: true
+      }
+    });
+  });
+
+  /* ==========================================================
+     4. 图片视差 — 比文字慢一点
+     ========================================================== */
+  const mm = gsap.matchMedia();
+
+  mm.add("(min-width: 901px)", () => {
+    if (reduceMotion) return;
+
+    gsap.utils.toArray(".fig img").forEach((img) => {
+      gsap.fromTo(
+        img,
+        { yPercent: -9 },
+        {
+          yPercent: 9,
+          ease: "none",
+          scrollTrigger: {
+            trigger: img.closest(".fig"),
+            start: "top bottom",
+            end: "bottom top",
+            scrub: true,
+            invalidateOnRefresh: true
+          }
+        }
+      );
+    });
+  });
+
+  /* ==========================================================
+     5. 左侧联动 — Intersection Observer 改变色调
+     ========================================================== */
+  const THEMES = {
+    base: { bg: "#fbf8f4", accent: "#e67e22" },
+    sea:  { bg: "#f6f3ec", accent: "#d98a3d" },
+    sun:  { bg: "#fbf3e7", accent: "#e2761f" },
+    dusk: { bg: "#f7f1ea", accent: "#c96a2b" },
+    calm: { bg: "#faf6f0", accent: "#dd8a4a" }
+  };
+
+  const panelEl = document.getElementById("panel");
+  const rootStyle = document.documentElement.style;
+  const accentState = { r: 230, g: 126, b: 34 };
+  let currentTheme = "base";
+
+  function setTheme(name) {
+    if (name === currentTheme) return;
+    currentTheme = name;
+
+    const t = THEMES[name] || THEMES.base;
+
+    // 背景色柔和过渡
+    gsap.to(panelEl, {
+      backgroundColor: t.bg,
+      duration: 1.2,
+      ease: "power2.out",
+      overwrite: "auto"
+    });
+
+    // 点缀色过渡（补间 RGB → 写入 CSS 变量）
+    const c = gsap.utils.splitColor(t.accent);
+    gsap.to(accentState, {
+      r: c[0],
+      g: c[1],
+      b: c[2],
+      duration: 1.2,
+      ease: "power2.out",
+      overwrite: "auto",
+      onUpdate() {
+        rootStyle.setProperty(
+          "--accent",
+          "rgb(" +
+            Math.round(accentState.r) + ", " +
+            Math.round(accentState.g) + ", " +
+            Math.round(accentState.b) + ")"
+        );
+      }
+    });
+  }
+
+  const themeTargets = document.querySelectorAll("[data-theme]");
+
+  if ("IntersectionObserver" in window && themeTargets.length) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const theme = entry.target.getAttribute("data-theme");
+            if (theme) setTheme(theme);
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "-48% 0px -48% 0px",
+        threshold: 0
+      }
+    );
+
+    themeTargets.forEach((el) => io.observe(el));
+  }
+
+  /* ==========================================================
+     6. 刷新 & 收尾
+     ========================================================== */
+  window.addEventListener("load", () => ScrollTrigger.refresh());
+
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => ScrollTrigger.refresh());
+  }
+
+  // 图片加载后重算滚动高度
+  document.querySelectorAll(".fig img").forEach((img) => {
+    if (!img.complete) {
+      img.addEventListener("load", () => ScrollTrigger.refresh(), { once: true });
+    }
+  });
+
+  // 移动端地址栏变化时重算
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => ScrollTrigger.refresh(), 220);
+  });
+})();
+</script>
+
+</body>
+</html>
